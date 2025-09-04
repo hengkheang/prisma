@@ -1,11 +1,14 @@
-import os
 from huggingface_hub import InferenceClient
 import streamlit as st
 import pandas as pd
+import os
+
+st.title("SYBAU")
+st.write("LOLLLLLLLLLLL")
 
 client = InferenceClient(
     provider="featherless-ai",
-    api_key=os.environ["_TOKEN"],
+    api_key=st.secrets["H_TOKEN"],
 )
 
 stream = client.chat.completions.create(
@@ -14,7 +17,7 @@ stream = client.chat.completions.create(
         {"role": "user","content": "What is the capital of France?"}
     ],
     temperature=0.1,
-    max_tokens=1000,
+    max_tokens=100,
     stream=True,
 )
 
