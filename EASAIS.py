@@ -2,9 +2,12 @@ from huggingface_hub import InferenceClient
 import streamlit as st
 import pandas as pd
 import os
+from PIL import Image
 
-st.title("SYBAU")
-st.write("LOLLLLLLLLLLL")
+st.title("🥀🥀🥀🥀🥀🥀🥀")
+st.write("Schlawg")
+image = Image.open("schlawg.jpeg")
+st.image(image, caption="Schlawg")
 
 client = InferenceClient(
     provider="featherless-ai",
@@ -22,4 +25,5 @@ stream = client.chat.completions.create(
 )
 
 for chunk in stream:
+
     print(chunk.choices[0].delta.content, end="")
