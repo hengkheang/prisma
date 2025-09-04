@@ -1,9 +1,11 @@
 import os
 from huggingface_hub import InferenceClient
+import streamlit as st
+import pandas as pd
 
 client = InferenceClient(
     provider="featherless-ai",
-    api_key=os.environ["HF_TOKEN"],
+    api_key=os.environ["_TOKEN"],
 )
 
 stream = client.chat.completions.create(
