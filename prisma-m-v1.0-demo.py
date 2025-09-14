@@ -7,6 +7,8 @@ from pathlib import Path
 from PIL import Image
 from pix2text import Pix2Text, merge_line_texts
 import streamlit.components.v1 as components
+def stop_stream():
+    st.session_state.stop = True
 
 st.title("PRISMA-M-V1.0 DEMO")
 
@@ -79,8 +81,11 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
             if delta:  
                 text += delta
                 ph.write(text)
-            if st.button("Stop"):
+            st.button("Stop", key="stop_button", on_click=stop_stream)
+            if st.session_state.stop:
                 break
+
+                
         
 
 
