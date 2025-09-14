@@ -22,7 +22,6 @@ if 'solution' not in st.session_state:
 if 'ready_solution' not in st.session_state:
     st.session_state.ready_solution = []
 
-
 if "unified_text" not in st.session_state:
     st.session_state.unified_text=""
 
@@ -36,7 +35,6 @@ st.session_state.exam = choose_exam
 
 if st.session_state.solution == []:
     uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
-
     if uploaded:
         st.session_state.solution = uploaded
 
@@ -46,11 +44,8 @@ else:
         for p in st.session_state.solution:
             p2t = Pix2Text.from_config()
             outs2 = p2t.recognize(p, file_type='text_formula', return_text=True, save_analysis_res='mixed-out.jpg')
-            st.session_state.ready_solution.append(outs2)
-        st.write("### Editable Preview")
         for k in st.session_state.ready_solution:
             st.session_state.unified_text+=f"{k}\n"
-        st.session_state.edited_text = st.text_area("Editable Preview", value=st.session_state.unified_text, height=300)
         if st.button("Confirm and Send"):
             client = InferenceClient(
                 provider="featherless-ai",
