@@ -1,3 +1,2 @@
-streamlit  # or whatever version you tested locally
-requests             # for API calls
-huggingface_hub      # for Hugging Face API
+pix2text
+streamlit
