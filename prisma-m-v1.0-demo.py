@@ -29,7 +29,7 @@ if "edited_text" not in st.session_state:
     st.session_state.edited_text = "\n".join(st.session_state.ready_solution)
     
 if "input" not in st.session_state:
-    st.session_state.input == []
+    st.session_state.input = []
 
 
 choose_exam = st.selectbox("Choose your paper", local_files)
