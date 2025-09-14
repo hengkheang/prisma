@@ -60,11 +60,11 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
         api_key=os.environ["APITOKEN"],
         )
 
-    stream = client.chat.completions.create(
+        stream = client.chat.completions.create(
         model="Qwen/Qwen2.5-Math-1.5B-Instruct",
         messages=[
             {"role": "system","content": "Solve the problem concisely"},
-            {"role": "system","content": str(st.session_state.edited_text)}
+            {"role": "system","content": st.session_state.input}
         ],
         temperature=0.1,
         max_tokens=1000,
