@@ -6,6 +6,7 @@ import time
 from pathlib import Path
 from PIL import Image
 from pix2text import Pix2Text, merge_line_texts
+import streamlit.components.v1 as components
 
 st.title("PRISMA-M-V1.0 DEMO")
 
@@ -47,9 +48,12 @@ if st.button("Next") and st.session_state.ready_solution == []:
         st.session_state.unified_text+=f"{k}\n"
 
 if st.session_state.input == []:
-    st.session_state.edited_text = st.text_area("Editable Preview", value=st.session_state.unified_text, height=300)
+    st.session_state.edited_text = st.text_area("Preview", value=st.session_state.unified_text, height=300)
+    st.markdown("### Rendered preview")
+    st.latex(st.session_state.edited_text)
     if st.button("Confirm"):
         st.session_state.input = st.session_state.edited_text
-        st.write(st.session_state.input)
+        
+
 
 
