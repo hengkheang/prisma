@@ -35,6 +35,12 @@ if "edited_text" not in st.session_state:
 if "input" not in st.session_state:
     st.session_state.input = []
 
+if "stop" not in st.session_state:
+    st.session_state.stop = True
+
+def stop_stream():
+    st.session_state.stop = True
+
 
 choose_exam = st.selectbox("Choose your paper", local_files)
 st.session_state.exam = choose_exam
