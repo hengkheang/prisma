@@ -36,9 +36,7 @@ choose_exam = st.selectbox("Choose your paper", local_files)
 st.session_state.exam = choose_exam
 
 if st.session_state.ready_solution == []:
-    uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
-    if uploaded:
-        st.session_state.solution = uploaded
+    st.session_state.solution = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
             
 if st.button("Next") and st.session_state.ready_solution == []:
     for p in st.session_state.solution:
