@@ -75,9 +75,12 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
         ph = right.empty()
         text = ""
         for chunk in stream:
-            text += chunk
-            ph.write(text)
-            time.sleep(0.1)          
+            delta = chunk.choices[0].delta.get("content")  # the actual string
+            if delta:  
+                text += delta
+                ph.write(text)
+            if st.button("Stop"):
+                break
         
 
 
