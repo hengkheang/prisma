@@ -88,8 +88,8 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
             if delta:  
                 text += delta
                 ph.write(text)
-        if st.button("Stop", key="stop_button"):
-            st.experimental_rerun()
+        #if st.button("Stop", key="stop_button"):
+            #st.experimental_rerun()
 
                 
         
