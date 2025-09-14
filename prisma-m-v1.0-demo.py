@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image
 from pix2text import Pix2Text, merge_line_texts
 import streamlit.components.v1 as components
+
 def stop_stream():
     st.session_state.stop = True
 
