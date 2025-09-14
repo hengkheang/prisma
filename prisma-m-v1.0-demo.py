@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image
 from pix2text import Pix2Text, merge_line_texts
 import streamlit.components.v1 as components
+import re
 
 def stop_stream():
     st.session_state.stop = True
@@ -87,7 +88,9 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
             delta = chunk.choices[0].delta.get("content")  # the actual string
             if delta:  
                 text += delta
-                ph.write(text)
+                output_fixed = re.sub(r'\((.*?)\)', r'$\1$', output)
+                output_fixed = re.sub(r'\[(.*?)\]', r'$$\1$$', output_fixed)
+                ph.write(output_fixed)
         #if st.button("Stop", key="stop_button"):
             #st.experimental_rerun()
 
