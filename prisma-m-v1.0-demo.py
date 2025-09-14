@@ -91,6 +91,7 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
                 output_fixed = re.sub(r'\((.*?)\)', r'$\1$', output)
                 output_fixed = re.sub(r'\[(.*?)\]', r'$$\1$$', output_fixed)
                 ph.write(output_fixed)
+                time.sleep(0.1)
         #if st.button("Stop", key="stop_button"):
             #st.experimental_rerun()
 
