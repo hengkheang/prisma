@@ -48,9 +48,40 @@ if st.button("Next") and st.session_state.ready_solution == []:
         st.session_state.unified_text+=f"{k}\n"
 
 if st.session_state.unified_text != [] and st.session_state.input == []:
-    col1, col2 = st.session_state.edited_text = st.text_area("Preview", value=st.session_state.unified_text, height=300), st.write(st.session_state.edited_text)
+    col1, col2 = st.columns(2)
+    with col1:
+        st.session_state.edited_text = st.text_area("Preview", value=st.session_state.unified_text, height=300)
+    with col2:
+        st.write(st.session_state.edited_text)
     if st.button("Confirm"):
         st.session_state.input = st.session_state.edited_text
+        client = InferenceClient(
+        provider="featherless-ai",
+        api_key=os.environ["APITOKEN"],
+        )
+
+    stream = client.chat.completions.create(
+        model="Qwen/Qwen2.5-Math-1.5B-Instruct",
+        messages=[
+            {"role": "system","content": "Solve the problem concisely"},
+            {"role": "system","content": str(st.session_state.edited_text)}
+        ],
+        temperature=0.1,
+        max_tokens=1000,
+        stream=True,
+        )
+
+    for chunk in stream:
+        delta = chunk.choices[0].delta.get("content")
+        if delta:
+            left, right = st.columns([1, 10])
+            left.write("🤗")
+            ph = right.empty()
+            text = ""
+            d = chunk.choices[0].delta.content
+            text += d.replace("\n", " ")
+            ph.write(text)
+            time.sleep(0.5)
         
 
 
