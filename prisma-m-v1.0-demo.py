@@ -35,7 +35,7 @@ if "input" not in st.session_state:
 choose_exam = st.selectbox("Choose your paper", local_files)
 st.session_state.exam = choose_exam
 
-if st.session_state.solution == []:
+if st.session_state.ready_solution == []:
     uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
     if uploaded:
         st.session_state.solution = uploaded
