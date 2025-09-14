@@ -38,12 +38,15 @@ if st.session_state.solution == []:
     if uploaded:
         st.session_state.solution = uploaded
             
-if st.button("Next"):
-    st.session_state.ready_solution == []
+if st.button("Next") and st.session_state.ready_solution == []:
     for p in st.session_state.solution:
         p2t = Pix2Text.from_config()
         outs2 = p2t.recognize(p, file_type='text_formula', return_text=True, save_analysis_res='mixed-out.jpg')
         st.session_state.ready_solution.append(outs2)
     for k in st.session_state.ready_solution:
         st.session_state.unified_text+=f"{k}\n"
-        st.write(st.session_state.unified_text)
+
+st.session_state.edited_text = st.text_area("Editable Preview", value=st.session_state.unified_text, height=300)
+if st.button("Finished"):
+    st.write(st.session_state.unified_text)
+
