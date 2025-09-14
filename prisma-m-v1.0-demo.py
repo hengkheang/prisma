@@ -27,7 +27,9 @@ if "unified_text" not in st.session_state:
 
 if "edited_text" not in st.session_state:
     st.session_state.edited_text = "\n".join(st.session_state.ready_solution)
-
+    
+if "input" not in st.session_state:
+    st.session_state.input == []
 
 
 choose_exam = st.selectbox("Choose your paper", local_files)
@@ -46,7 +48,10 @@ if st.button("Next") and st.session_state.ready_solution == []:
     for k in st.session_state.ready_solution:
         st.session_state.unified_text+=f"{k}\n"
 
-st.session_state.edited_text = st.text_area("Editable Preview", value=st.session_state.unified_text, height=300)
-if st.button("Finished"):
-    st.write(st.session_state.unified_text)
+if st.session_state.input == []:
+    st.session_state.edited_text = st.text_area("Editable Preview", value=st.session_state.unified_text, height=300)
+    if st.button("Confirm"):
+        st.session_state.input = st.session_state.edited_text
+        st.write(st.session_state.input)
+
 
