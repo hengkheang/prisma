@@ -70,18 +70,16 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
         max_tokens=1000,
         stream=True,
         )
-
-    for chunk in stream:
-        delta = chunk.choices[0].delta.get("content")
-        if delta:
-            left, right = st.columns([1, 10])
-            left.write("🤗")
-            ph = right.empty()
-            text = ""
-            d = chunk.choices[0].delta.content
-            text += d.replace("\n", " ")
-            ph.write(text)
-            time.sleep(0.5)
+        left, right = st.columns([1, 10])
+        left.write("🤗")
+        ph = right.empty()
+        text = ""
+        for chunk in stream:
+            delta = chunk.choices[0].delta.get("content")
+            if delta:
+                text += delta.replace("\n", " ")
+                ph.write(text)
+                time.sleep(0.5)          
         
 
 
