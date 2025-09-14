@@ -75,11 +75,9 @@ if st.session_state.unified_text != [] and st.session_state.input == []:
         ph = right.empty()
         text = ""
         for chunk in stream:
-            delta = chunk.choices[0].delta.get("content")
-            if delta:
-                text += delta.replace("\n", " ")
-                ph.write(text)
-                time.sleep(0.5)          
+            text += chunk
+            ph.write(text)
+            time.sleep(0.1)          
         
 
 
