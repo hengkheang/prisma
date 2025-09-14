@@ -37,7 +37,7 @@ if st.session_state.solution == []:
     uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
     if uploaded:
         st.session_state.solution = uploaded
-
+        st.button("Next")
 else:
     if st.button("Next"):
         st.session_state.ready_solution = []
