@@ -33,17 +33,17 @@ if "edited_text" not in st.session_state:
 choose_exam = st.selectbox("Choose your paper", local_files)
 st.session_state.exam = choose_exam
 
-if st.session_state.ready_solution == []:
-    if st.session_state.solution == []:
-        uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
-        if uploaded:
-            st.session_state.solution = uploaded
-            if st.button("Next"):
-                st.session_state.ready_solution == []
-                for p in st.session_state.solution:
-                    p2t = Pix2Text.from_config()
-                    outs2 = p2t.recognize(p, file_type='text_formula', return_text=True, save_analysis_res='mixed-out.jpg')
-                    st.session_state.ready_solution.append(outs2)
-                for k in st.session_state.ready_solution:
-                    st.session_state.unified_text+=f"{k}\n"
-                    st.write(st.session_state.unified_text)
+if st.session_state.solution == []:
+    uploaded = st.file_uploader("Upload Your Solutions", type="jpg",accept_multiple_files=True)
+    if uploaded:
+        st.session_state.solution = uploaded
+            
+if st.button("Next"):
+    st.session_state.ready_solution == []
+    for p in st.session_state.solution:
+        p2t = Pix2Text.from_config()
+        outs2 = p2t.recognize(p, file_type='text_formula', return_text=True, save_analysis_res='mixed-out.jpg')
+        st.session_state.ready_solution.append(outs2)
+    for k in st.session_state.ready_solution:
+        st.session_state.unified_text+=f"{k}\n"
+        st.write(st.session_state.unified_text)
